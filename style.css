@@ -1,0 +1,2182 @@
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #111;
+  font-family: Georgia, "Times New Roman", serif;
+  color: #292323;
+}
+
+button {
+  font-family: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+  --cream: #f6f0e8;
+  --paper: #eee4d8;
+  --brown: #3d302c;
+  --soft-brown: #806d65;
+  --rose: #b88787;
+  --dark: #171414;
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+.cover,
+.page {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover,
+.page {
+  display: none;
+}
+
+.cover.active,
+.page.active {
+  display: block;
+}
+
+.cover.active {
+  display: flex;
+}
+
+.page {
+  padding: 45px 6vw 100px;
+}
+
+.page-header {
+  position: relative;
+  z-index: 10;
+
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  color: rgba(60, 45, 40, .6);
+}
+
+.eyebrow {
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: .55;
+}
+
+.photo {
+  overflow: hidden;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-reveal {
+  opacity: 0;
+  transform: translateY(35px) scale(.97);
+}
+
+.page.active .photo-reveal {
+  animation: photoReveal .8s ease forwards;
+}
+
+@keyframes photoReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =========================================================
+   COVER
+========================================================= */
+
+.cover {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  color: #f8f2ec;
+
+  background:
+    radial-gradient(circle at 50% 45%,
+      rgba(187, 137, 137, .22),
+      transparent 30%),
+    radial-gradient(circle at 15% 20%,
+      rgba(255,255,255,.06),
+      transparent 25%),
+    linear-gradient(135deg, #1a1415, #302326 50%, #171315);
+}
+
+.cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at center,
+      transparent 0 30%,
+      rgba(0,0,0,.18) 75%);
+}
+
+.cover-glow {
+  position: absolute;
+
+  width: 450px;
+  height: 450px;
+
+  border-radius: 50%;
+
+  background: rgba(194, 143, 143, .12);
+
+  filter: blur(70px);
+}
+
+.cover-content {
+  position: relative;
+  z-index: 2;
+}
+
+.cover-small {
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 6px;
+  margin-bottom: 25px;
+  opacity: .65;
+}
+
+.cover h1 {
+  font-size: clamp(48px, 8vw, 92px);
+  font-weight: 400;
+  line-height: .95;
+  letter-spacing: -4px;
+}
+
+.cover h1 span {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.cover-description {
+  margin-top: 28px;
+
+  font-size: 14px;
+  line-height: 1.8;
+
+  color: rgba(255,255,255,.68);
+}
+
+.open-album {
+  margin-top: 38px;
+
+  padding: 14px 25px;
+
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 100px;
+
+  color: white;
+  background: rgba(255,255,255,.05);
+
+  cursor: pointer;
+
+  transition:
+    transform .3s ease,
+    background .3s ease;
+}
+
+.open-album span {
+  margin-right: 7px;
+}
+
+.open-album:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,.12);
+}
+
+.scroll-hint {
+  margin-top: 70px;
+
+  font-family: Arial, sans-serif;
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  opacity: .35;
+}
+
+.cover-stars span {
+  position: absolute;
+  color: rgba(255,255,255,.5);
+  animation: floatStar 5s ease-in-out infinite;
+}
+
+.cover-stars span:nth-child(1) {
+  top: 16%;
+  left: 18%;
+}
+
+.cover-stars span:nth-child(2) {
+  top: 30%;
+  right: 15%;
+}
+
+.cover-stars span:nth-child(3) {
+  bottom: 22%;
+  left: 13%;
+}
+
+.cover-stars span:nth-child(4) {
+  bottom: 15%;
+  right: 20%;
+}
+
+.cover-stars span:nth-child(5) {
+  top: 13%;
+  right: 35%;
+}
+
+.cover-stars span:nth-child(6) {
+  bottom: 32%;
+  right: 8%;
+}
+
+@keyframes floatStar {
+  50% {
+    transform: translateY(-10px);
+    opacity: .3;
+  }
+}
+
+
+/* =========================================================
+   PAGE 1 — NOSOTROS
+========================================================= */
+
+.page-us {
+  background:
+    radial-gradient(circle at 15% 15%, rgba(191,147,147,.17), transparent 24%),
+    radial-gradient(circle at 90% 80%, rgba(182,154,133,.16), transparent 25%),
+    #f4eee7;
+}
+
+.ambient-circle {
+  position: absolute;
+  border: 1px solid rgba(140,104,96,.12);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.circle-one {
+  width: 550px;
+  height: 550px;
+  top: -180px;
+  right: -180px;
+}
+
+.circle-two {
+  width: 400px;
+  height: 400px;
+  bottom: -180px;
+  left: -160px;
+}
+
+.section-intro {
+  position: relative;
+  z-index: 2;
+
+  max-width: 620px;
+
+  margin: 70px auto 50px;
+  text-align: center;
+}
+
+.section-intro h2 {
+  margin: 15px 0;
+
+  font-size: clamp(46px, 7vw, 80px);
+  font-weight: 400;
+  letter-spacing: -3px;
+}
+
+.section-intro > p:last-child {
+  max-width: 470px;
+  margin: auto;
+
+  font-size: 14px;
+  line-height: 1.8;
+
+  color: #756762;
+}
+
+.us-gallery {
+  max-width: 1050px;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.photo-portrait {
+  aspect-ratio: 9 / 16;
+
+  background: white;
+  padding: 7px;
+
+  box-shadow:
+    0 15px 35px rgba(72,45,40,.13);
+
+  border-radius: 2px;
+}
+
+.photo-a {
+  transform: rotate(-2deg);
+}
+
+.photo-b {
+  transform: translateY(35px) rotate(2deg);
+}
+
+.photo-c {
+  transform: rotate(-1deg);
+}
+
+.photo-d {
+  transform: translateY(-10px) rotate(2deg);
+}
+
+.photo-e {
+  transform: rotate(-2deg);
+}
+
+.photo-f {
+  transform: translateY(25px) rotate(1deg);
+}
+
+.us-note {
+  max-width: 500px;
+  margin: 70px auto 0;
+
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.7;
+
+  color: #796761;
+}
+
+.us-note span {
+  font-size: 20px;
+}
+
+
+/* =========================================================
+   PAGE 2 — GAMING
+========================================================= */
+
+.page-me {
+  color: #e9e5df;
+  background: #101114;
+}
+
+.gaming-grid {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+
+  background-size: 45px 45px;
+}
+
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 35%;
+
+  height: 1px;
+
+  background: rgba(255,255,255,.04);
+
+  animation: scan 7s linear infinite;
+}
+
+@keyframes scan {
+  from {
+    transform: translateY(-100px);
+  }
+
+  to {
+    transform: translateY(500px);
+  }
+}
+
+.pixel-decoration {
+  position: absolute;
+
+  font-family: monospace;
+  font-size: 25px;
+
+  color: rgba(255,255,255,.08);
+}
+
+.pixel-one {
+  top: 18%;
+  left: 6%;
+}
+
+.pixel-two {
+  bottom: 18%;
+  right: 8%;
+}
+
+.pixel-three {
+  top: 60%;
+  right: 15%;
+}
+
+.gaming-header {
+  color: rgba(255,255,255,.4);
+}
+
+.gaming-intro {
+  max-width: 800px;
+  margin: 75px auto 50px;
+}
+
+.online-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 20px;
+
+  font-family: monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,.45);
+}
+
+.online-status span {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+  background: #8ecf8e;
+
+  box-shadow: 0 0 10px #8ecf8e;
+}
+
+.gaming-intro h2 {
+  margin: 15px 0;
+
+  font-size: clamp(45px, 7vw, 85px);
+  line-height: .9;
+  font-weight: 400;
+  letter-spacing: -4px;
+}
+
+.gaming-intro h2 span {
+  font-style: italic;
+}
+
+.gaming-intro > p:last-child {
+  max-width: 500px;
+
+  color: rgba(255,255,255,.48);
+
+  line-height: 1.7;
+}
+
+.gaming-layout {
+  max-width: 1050px;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 20px;
+}
+
+.gaming-photo-main {
+  position: relative;
+
+  aspect-ratio: 9 / 16;
+
+  max-height: 650px;
+
+  border: 1px solid rgba(255,255,255,.1);
+
+  overflow: hidden;
+}
+
+.gaming-photo-main img,
+.gaming-photo-second img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-label {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+
+  padding: 7px 10px;
+
+  background: rgba(0,0,0,.65);
+
+  font-family: monospace;
+  font-size: 8px;
+  letter-spacing: 2px;
+}
+
+.gaming-photo-second {
+  aspect-ratio: 9 / 16;
+
+  max-height: 500px;
+
+  border: 1px solid rgba(255,255,255,.1);
+
+  overflow: hidden;
+}
+
+.gaming-terminal {
+  grid-column: 2;
+
+  padding: 20px;
+
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.025);
+
+  font-family: monospace;
+  font-size: 11px;
+}
+
+.terminal-top {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.terminal-top span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.2);
+}
+
+.terminal-content p {
+  margin-bottom: 10px;
+  color: rgba(255,255,255,.4);
+}
+
+.terminal-content p span {
+  color: #8ecf8e;
+}
+
+.terminal-highlight {
+  padding-left: 15px;
+  color: rgba(255,255,255,.8) !important;
+}
+
+.terminal-content strong {
+  color: #8ecf8e;
+}
+
+.guitar-card {
+  position: relative;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  background: rgba(255,255,255,.03);
+}
+
+.guitar-card img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.guitar-label {
+  position: absolute;
+  left: 15px;
+  bottom: 15px;
+
+  font-family: monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.guitar-label span {
+  margin-right: 8px;
+  opacity: .4;
+}
+
+.music-symbol {
+  position: absolute;
+  z-index: 2;
+
+  right: 15px;
+  top: 10px;
+
+  font-size: 25px;
+
+  opacity: .5;
+}
+
+.game-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  padding: 12px;
+
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.game-card img {
+  width: 90px;
+  height: 70px;
+
+  object-fit: contain;
+}
+
+.game-card div {
+  font-family: monospace;
+}
+
+.game-card span {
+  display: block;
+
+  font-size: 8px;
+  letter-spacing: 2px;
+  opacity: .4;
+}
+
+.game-card strong {
+  font-size: 20px;
+}
+
+.gaming-bottom {
+  max-width: 1050px;
+  margin: 45px auto 0;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-family: monospace;
+  font-size: 8px;
+  letter-spacing: 3px;
+
+  opacity: .3;
+}
+
+
+/* =========================================================
+   PAGE 3 — HER / SCRAPBOOK
+========================================================= */
+
+.page-her {
+  color: #493d38;
+
+  background:
+    radial-gradient(circle at 15% 20%, rgba(200,160,151,.20), transparent 22%),
+    radial-gradient(circle at 90% 75%, rgba(184,153,127,.17), transparent 23%),
+    #eee4d8;
+}
+
+.page-her::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  opacity: .28;
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(rgba(75,55,48,.18) .5px, transparent .5px);
+
+  background-size: 6px 6px;
+}
+
+.her-paper-glow {
+  position: absolute;
+
+  width: 600px;
+  height: 600px;
+
+  top: 20%;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  background: rgba(255,255,255,.25);
+
+  filter: blur(100px);
+}
+
+.her-header {
+  color: rgba(70,55,48,.5);
+}
+
+.her-doodle {
+  position: absolute;
+
+  z-index: 1;
+
+  color: rgba(130,91,85,.32);
+
+  pointer-events: none;
+}
+
+.doodle-one {
+  top: 13%;
+  left: 7%;
+  font-size: 28px;
+  transform: rotate(-15deg);
+}
+
+.doodle-two {
+  top: 23%;
+  right: 8%;
+  font-size: 20px;
+}
+
+.doodle-three {
+  top: 45%;
+  left: 5%;
+  font-size: 18px;
+}
+
+.doodle-four {
+  top: 67%;
+  right: 6%;
+  font-size: 20px;
+  transform: rotate(15deg);
+}
+
+.doodle-five {
+  bottom: 15%;
+  left: 9%;
+  font-size: 28px;
+}
+
+.doodle-six {
+  bottom: 6%;
+  right: 12%;
+  font-size: 20px;
+}
+
+.her-tape {
+  position: absolute;
+
+  width: 110px;
+  height: 28px;
+
+  background: rgba(212,191,161,.5);
+
+  z-index: 4;
+
+  opacity: .65;
+}
+
+.tape-top {
+  top: 25%;
+  left: 9%;
+
+  transform: rotate(-8deg);
+}
+
+.tape-bottom {
+  bottom: 10%;
+  right: 8%;
+
+  transform: rotate(7deg);
+}
+
+.her-intro {
+  position: relative;
+  z-index: 5;
+
+  max-width: 720px;
+
+  margin: 75px auto 55px;
+
+  text-align: center;
+}
+
+.her-title {
+  margin: 15px 0;
+
+  font-size: clamp(48px, 8vw, 85px);
+
+  font-weight: 400;
+
+  line-height: .9;
+
+  letter-spacing: -4px;
+}
+
+.her-title span {
+  font-style: italic;
+}
+
+.her-intro > p:last-child {
+  max-width: 520px;
+
+  margin: 25px auto 0;
+
+  font-size: 14px;
+  line-height: 1.8;
+
+  color: #76655f;
+}
+
+.her-hand-note {
+  position: absolute;
+
+  font-family: "Comic Sans MS", cursive;
+
+  font-size: 12px;
+
+  line-height: 1.3;
+
+  color: rgba(91,69,62,.65);
+}
+
+.note-left {
+  left: -30px;
+  top: 30px;
+
+  transform: rotate(-7deg);
+}
+
+.note-right {
+  right: -25px;
+  top: 70px;
+
+  transform: rotate(6deg);
+}
+
+.her-scrapbook {
+  position: relative;
+
+  max-width: 950px;
+
+  min-height: 620px;
+
+  margin: auto;
+}
+
+.her-polaroid {
+  position: absolute;
+
+  padding: 12px 12px 42px;
+
+  background: #f8f4ee;
+
+  box-shadow:
+    0 20px 35px rgba(77,52,45,.18);
+}
+
+.her-main-photo {
+  width: 310px;
+
+  left: 9%;
+  top: 20px;
+
+  transform: rotate(-5deg);
+}
+
+.her-second-photo {
+  width: 280px;
+
+  right: 9%;
+  top: 130px;
+
+  transform: rotate(6deg);
+}
+
+.polaroid-image {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+
+  overflow: hidden;
+}
+
+.polaroid-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.polaroid-caption {
+  position: absolute;
+
+  left: 14px;
+  bottom: 13px;
+
+  font-family: "Comic Sans MS", cursive;
+
+  font-size: 12px;
+
+  color: #695650;
+}
+
+.polaroid-caption span {
+  margin-right: 5px;
+}
+
+.her-note-card {
+  position: absolute;
+
+  width: 310px;
+
+  right: 19%;
+  bottom: 15px;
+
+  padding: 35px 30px;
+
+  background: #e6d6c4;
+
+  box-shadow:
+    0 15px 30px rgba(77,52,45,.12);
+
+  transform: rotate(-2deg);
+
+  font-size: 14px;
+  line-height: 1.8;
+
+  color: #66534d;
+}
+
+.note-star {
+  position: absolute;
+
+  top: 10px;
+  right: 15px;
+
+  font-size: 20px;
+
+  opacity: .45;
+}
+
+.note-signature {
+  display: block;
+
+  margin-top: 20px;
+
+  font-family: "Comic Sans MS", cursive;
+
+  font-size: 11px;
+
+  text-align: right;
+}
+
+
+/* -------------------------
+   LANA
+-------------------------- */
+
+.lana-section {
+  position: relative;
+  z-index: 5;
+
+  max-width: 1000px;
+
+  margin: 100px auto 0;
+
+  padding-top: 55px;
+
+  border-top: 1px solid rgba(87,65,58,.17);
+}
+
+.section-label {
+  font-family: Arial, sans-serif;
+
+  font-size: 9px;
+  letter-spacing: 4px;
+
+  color: rgba(76,58,52,.5);
+}
+
+.section-label span {
+  margin-right: 15px;
+
+  color: #9a7771;
+}
+
+.lana-heading {
+  margin: 20px 0 40px;
+
+  max-width: 500px;
+}
+
+.lana-heading p,
+.f1-heading p {
+  font-size: 13px;
+
+  color: #806f68;
+}
+
+.lana-heading h3,
+.f1-heading h3 {
+  margin-top: 8px;
+
+  font-size: clamp(30px, 5vw, 52px);
+
+  font-weight: 400;
+}
+
+.lana-heading h3 span,
+.f1-heading h3 span {
+  font-style: italic;
+}
+
+.lana-collage {
+  position: relative;
+
+  min-height: 620px;
+}
+
+.lana-photo {
+  position: absolute;
+
+  padding: 10px 10px 38px;
+
+  background: #f8f4ee;
+
+  box-shadow:
+    0 18px 35px rgba(70,48,42,.16);
+}
+
+.lana-one {
+  width: 300px;
+
+  left: 9%;
+  top: 20px;
+
+  transform: rotate(-4deg);
+}
+
+.lana-two {
+  width: 245px;
+
+  left: 39%;
+  top: 100px;
+
+  transform: rotate(5deg);
+}
+
+.special-image {
+  width: 100%;
+
+  overflow: hidden;
+}
+
+.lana-one .special-image {
+  aspect-ratio: 1 / 1.42;
+}
+
+.lana-two .special-image {
+  aspect-ratio: 562 / 703;
+}
+
+.special-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  background: #e8dfd6;
+}
+
+.lana-caption {
+  position: absolute;
+
+  bottom: 11px;
+  left: 12px;
+
+  font-family: "Comic Sans MS", cursive;
+
+  font-size: 11px;
+
+  color: #715d57;
+}
+
+.her-quote-card {
+  position: absolute;
+
+  width: 300px;
+
+  right: 7%;
+  top: 220px;
+
+  padding: 40px 30px;
+
+  background: rgba(255,255,255,.45);
+
+  border: 1px solid rgba(90,70,63,.12);
+
+  transform: rotate(2deg);
+
+  text-align: center;
+}
+
+.quote-mark {
+  font-size: 45px;
+
+  line-height: .5;
+
+  opacity: .25;
+}
+
+.her-quote-card p {
+  margin: 18px 0;
+
+  font-size: 17px;
+
+  line-height: 1.6;
+
+  font-style: italic;
+}
+
+.quote-bottom {
+  font-family: "Comic Sans MS", cursive;
+
+  font-size: 10px;
+
+  color: #846d65;
+}
+
+
+/* -------------------------
+   F1
+-------------------------- */
+
+.f1-section {
+  position: relative;
+  z-index: 5;
+
+  max-width: 1000px;
+
+  margin: 100px auto 0;
+
+  padding-top: 55px;
+
+  border-top: 1px solid rgba(87,65,58,.17);
+}
+
+.f1-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin: 20px 0 40px;
+}
+
+.f1-number-big {
+  font-family: Arial, sans-serif;
+
+  font-size: clamp(70px, 12vw, 150px);
+
+  line-height: .7;
+
+  font-weight: 900;
+
+  color: rgba(50,40,36,.09);
+}
+
+.f1-collage {
+  position: relative;
+
+  min-height: 600px;
+}
+
+.leclerc-card {
+  position: absolute;
+
+  left: 5%;
+  top: 20px;
+
+  width: 280px;
+
+  padding: 10px 10px 18px;
+
+  background: #f8f4ee;
+
+  box-shadow:
+    0 20px 40px rgba(70,48,42,.17);
+
+  transform: rotate(-3deg);
+}
+
+.leclerc-image {
+  aspect-ratio: 382 / 524;
+}
+
+.leclerc-caption {
+  margin-top: 12px;
+}
+
+.leclerc-caption span,
+.leclerc-caption small {
+  display: block;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 7px;
+
+  letter-spacing: 3px;
+}
+
+.leclerc-caption strong {
+  display: block;
+
+  margin: 2px 0;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 20px;
+
+  letter-spacing: 2px;
+}
+
+.leclerc-caption small {
+  color: #9a7771;
+}
+
+.car-photo {
+  position: absolute;
+
+  width: 370px;
+
+  right: 8%;
+  top: 75px;
+
+  transform: rotate(3deg);
+
+  padding: 10px;
+
+  background: #f8f4ee;
+
+  box-shadow:
+    0 20px 40px rgba(70,48,42,.15);
+}
+
+.car-image {
+  aspect-ratio: 1080 / 1350;
+}
+
+.car-caption {
+  display: block;
+
+  padding: 9px 2px 2px;
+
+  font-family: "Comic Sans MS", cursive;
+
+  font-size: 11px;
+}
+
+.race-note {
+  position: absolute;
+
+  width: 290px;
+
+  left: 31%;
+  bottom: 20px;
+
+  padding: 28px;
+
+  background: #e4d3c0;
+
+  transform: rotate(2deg);
+
+  box-shadow:
+    0 15px 30px rgba(70,48,42,.12);
+}
+
+.race-note p {
+  margin-bottom: 13px;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+
+  color: #67534c;
+}
+
+.race-line {
+  display: block;
+
+  width: 80px;
+  height: 2px;
+
+  margin-bottom: 20px;
+
+  background: #94766d;
+}
+
+.race-signature {
+  font-family: Arial, sans-serif;
+
+  font-size: 8px;
+
+  letter-spacing: 4px;
+
+  opacity: .45;
+}
+
+.her-bottom-note {
+  position: relative;
+
+  z-index: 5;
+
+  max-width: 650px;
+
+  margin: 70px auto 0;
+
+  text-align: center;
+
+  font-family: "Comic Sans MS", cursive;
+
+  font-size: 12px;
+
+  color: rgba(84,65,59,.65);
+}
+
+.her-bottom-note span {
+  margin: 0 10px;
+}
+
+
+/* =========================================================
+   PAGE 4 — FINAL NOSOTROS
+========================================================= */
+
+.page-final-us {
+  background:
+    radial-gradient(circle at 50% 40%, rgba(193,151,145,.2), transparent 28%),
+    #f1e8df;
+}
+
+.final-glow {
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  left: 50%;
+  top: 45%;
+
+  transform: translate(-50%, -50%);
+
+  background: rgba(191,143,137,.13);
+
+  filter: blur(90px);
+}
+
+.final-intro {
+  position: relative;
+  z-index: 2;
+
+  max-width: 650px;
+
+  margin: 70px auto 55px;
+
+  text-align: center;
+}
+
+.final-intro h2 {
+  margin: 15px 0;
+
+  font-size: clamp(42px, 7vw, 75px);
+
+  font-weight: 400;
+
+  letter-spacing: -3px;
+}
+
+.final-intro p:last-child {
+  font-size: 14px;
+
+  color: #786861;
+}
+
+.final-gallery {
+  position: relative;
+
+  max-width: 1000px;
+
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+
+  align-items: center;
+}
+
+.final-photo {
+  aspect-ratio: 9 / 16;
+
+  padding: 7px;
+
+  background: white;
+
+  box-shadow:
+    0 15px 35px rgba(70,48,42,.13);
+}
+
+.final-two {
+  transform: translateY(35px);
+}
+
+.final-three {
+  transform: rotate(2deg);
+}
+
+.final-four {
+  transform: rotate(-2deg);
+}
+
+.final-five {
+  transform: translateY(30px);
+}
+
+.final-six {
+  transform: rotate(2deg);
+}
+
+.final-message {
+  grid-column: 1 / -1;
+
+  padding: 20px;
+
+  text-align: center;
+
+  font-style: italic;
+
+  color: #786761;
+}
+
+.final-message span {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-size: 25px;
+}
+
+
+/* =========================================================
+   PERSON PAGES
+========================================================= */
+
+.page-person {
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.page-person.active {
+  display: flex;
+}
+
+.page-her-person {
+  background:
+    radial-gradient(circle at center,
+      rgba(211,174,169,.25),
+      transparent 35%),
+    #eee5dd;
+}
+
+.page-me-person {
+  color: #eee8e1;
+
+  background:
+    radial-gradient(circle at center,
+      rgba(116,94,91,.3),
+      transparent 35%),
+    #1c1919;
+}
+
+.person-glow {
+  position: absolute;
+
+  width: 450px;
+  height: 450px;
+
+  border-radius: 50%;
+
+  background: rgba(185,140,137,.12);
+
+  filter: blur(80px);
+}
+
+.person-content {
+  position: relative;
+  z-index: 3;
+
+  width: min(700px, 90%);
+}
+
+.person-content h2 {
+  margin: 15px 0 35px;
+
+  font-size: clamp(60px, 10vw, 110px);
+
+  font-weight: 400;
+
+  letter-spacing: -5px;
+}
+
+.person-photo {
+  width: min(340px, 70vw);
+
+  aspect-ratio: 9 / 16;
+
+  margin: auto;
+
+  padding: 8px;
+
+  background: white;
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,.18);
+
+  transform: rotate(-2deg);
+}
+
+.person-photo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.person-text {
+  max-width: 450px;
+
+  margin: 35px auto 0;
+
+  font-size: 14px;
+
+  line-height: 1.8;
+
+  opacity: .7;
+}
+
+
+/* =========================================================
+   ENDING
+========================================================= */
+
+.ending {
+  color: #f4eee8;
+
+  background:
+    radial-gradient(circle at center,
+      rgba(173,126,126,.22),
+      transparent 30%),
+    #171314;
+}
+
+.ending-stars {
+  position: absolute;
+  inset: 0;
+
+  opacity: .25;
+
+  background-image:
+    radial-gradient(circle, white 1px, transparent 1px);
+
+  background-size: 70px 70px;
+
+  animation: starMove 20s linear infinite;
+}
+
+@keyframes starMove {
+  to {
+    background-position: 70px 70px;
+  }
+}
+
+.ending-content {
+  position: relative;
+  z-index: 3;
+
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.ending-small {
+  font-family: Arial, sans-serif;
+
+  font-size: 9px;
+  letter-spacing: 5px;
+
+  opacity: .4;
+}
+
+.ending h2 {
+  margin: 25px 0;
+
+  font-size: clamp(55px, 9vw, 100px);
+
+  line-height: .9;
+
+  font-weight: 400;
+
+  letter-spacing: -5px;
+}
+
+.ending h2 span {
+  font-style: italic;
+}
+
+.ending-text {
+  max-width: 400px;
+
+  font-size: 14px;
+
+  line-height: 1.8;
+
+  color: rgba(255,255,255,.55);
+}
+
+.ending-heart {
+  margin: 35px 0 20px;
+
+  font-size: 35px;
+
+  animation: heartPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes heartPulse {
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+.ending-signature {
+  font-family: "Comic Sans MS", cursive;
+
+  font-size: 11px;
+
+  opacity: .4;
+}
+
+.restart-button {
+  margin-top: 40px;
+
+  padding: 12px 20px;
+
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 100px;
+
+  color: rgba(255,255,255,.7);
+
+  background: transparent;
+
+  cursor: pointer;
+
+  transition: .3s ease;
+}
+
+.restart-button:hover {
+  background: rgba(255,255,255,.08);
+}
+
+
+/* =========================================================
+   NAVEGACIÓN
+========================================================= */
+
+.navigation {
+  position: fixed;
+
+  z-index: 100;
+
+  left: 50%;
+  bottom: 25px;
+
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  padding: 8px 12px;
+
+  border: 1px solid rgba(255,255,255,.12);
+
+  border-radius: 100px;
+
+  background: rgba(30,25,25,.75);
+
+  backdrop-filter: blur(15px);
+
+  transition: opacity .3s ease;
+}
+
+.navigation.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-button {
+  width: 35px;
+  height: 35px;
+
+  border: 0;
+  border-radius: 50%;
+
+  color: white;
+
+  background: rgba(255,255,255,.08);
+
+  cursor: pointer;
+
+  transition: .25s ease;
+}
+
+.nav-button:hover {
+  background: rgba(255,255,255,.17);
+  transform: scale(1.05);
+}
+
+.dots {
+  display: flex;
+  gap: 7px;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.3);
+
+  cursor: pointer;
+
+  transition: .3s ease;
+}
+
+.dot.active {
+  width: 16px;
+
+  border-radius: 10px;
+
+  background: white;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 800px) {
+
+  .page {
+    padding: 30px 18px 100px;
+  }
+
+  .page-header {
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+
+
+  /* Nosotros */
+
+  .section-intro {
+    margin-top: 55px;
+  }
+
+  .us-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .photo-b,
+  .photo-d,
+  .photo-f {
+    transform: none;
+  }
+
+  .us-note {
+    margin-top: 45px;
+  }
+
+
+  /* Gaming */
+
+  .gaming-intro {
+    margin-top: 55px;
+  }
+
+  .gaming-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gaming-photo-main {
+    grid-column: 1 / -1;
+    width: 75%;
+    margin: auto;
+  }
+
+  .gaming-photo-second {
+    grid-column: 1;
+  }
+
+  .gaming-terminal {
+    grid-column: 2;
+  }
+
+  .game-card {
+    grid-column: 1 / -1;
+  }
+
+
+  /* Her */
+
+  .her-intro {
+    margin-top: 55px;
+  }
+
+  .her-hand-note {
+    display: none;
+  }
+
+  .her-scrapbook {
+    min-height: 800px;
+  }
+
+  .her-main-photo {
+    width: 235px;
+
+    left: 3%;
+    top: 0;
+  }
+
+  .her-second-photo {
+    width: 215px;
+
+    right: 2%;
+    top: 190px;
+  }
+
+  .her-note-card {
+    width: 250px;
+
+    right: 50%;
+    bottom: 0;
+
+    transform: translateX(50%) rotate(-2deg);
+  }
+
+  .lana-section,
+  .f1-section {
+    margin-top: 70px;
+  }
+
+  .lana-collage {
+    min-height: 750px;
+  }
+
+  .lana-one {
+    width: 220px;
+    left: 0;
+  }
+
+  .lana-two {
+    width: 190px;
+
+    left: auto;
+    right: 0;
+
+    top: 180px;
+  }
+
+  .her-quote-card {
+    width: 270px;
+
+    right: 50%;
+    transform: translateX(50%) rotate(2deg);
+
+    top: 440px;
+  }
+
+  .f1-heading {
+    align-items: center;
+  }
+
+  .f1-collage {
+    min-height: 800px;
+  }
+
+  .leclerc-card {
+    width: 220px;
+    left: 0;
+  }
+
+  .car-photo {
+    width: 240px;
+
+    right: 0;
+    top: 220px;
+  }
+
+  .race-note {
+    width: 260px;
+
+    left: 50%;
+    bottom: 0;
+
+    transform: translateX(-50%) rotate(2deg);
+  }
+
+
+  /* Final */
+
+  .final-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .final-message {
+    order: 3;
+  }
+
+
+  /* Person */
+
+  .person-content h2 {
+    margin-bottom: 25px;
+  }
+
+}
+
+
+@media (max-width: 520px) {
+
+  .cover h1 {
+    font-size: 48px;
+    letter-spacing: -3px;
+  }
+
+  .cover-description {
+    font-size: 12px;
+  }
+
+
+  /* Nosotros */
+
+  .us-gallery {
+    gap: 10px;
+  }
+
+  .photo-portrait {
+    padding: 5px;
+  }
+
+
+  /* Gaming */
+
+  .gaming-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .gaming-photo-main {
+    width: 85%;
+    grid-column: 1;
+  }
+
+  .gaming-photo-second {
+    grid-column: 1;
+  }
+
+  .gaming-terminal {
+    grid-column: 1;
+  }
+
+  .game-card {
+    grid-column: 1;
+  }
+
+  .gaming-bottom {
+    font-size: 7px;
+  }
+
+
+  /* Her */
+
+  .her-title {
+    font-size: 48px;
+  }
+
+  .her-intro > p:last-child {
+    font-size: 13px;
+  }
+
+  .her-scrapbook {
+    min-height: 720px;
+  }
+
+  .her-main-photo {
+    width: 190px;
+  }
+
+  .her-second-photo {
+    width: 175px;
+
+    top: 150px;
+  }
+
+  .her-note-card {
+    width: 230px;
+
+    padding: 28px 23px;
+
+    font-size: 12px;
+  }
+
+  .lana-collage {
+    min-height: 680px;
+  }
+
+  .lana-one {
+    width: 175px;
+  }
+
+  .lana-two {
+    width: 160px;
+
+    top: 155px;
+  }
+
+  .her-quote-card {
+    width: 230px;
+
+    top: 370px;
+
+    padding: 30px 20px;
+  }
+
+  .her-quote-card p {
+    font-size: 14px;
+  }
+
+  .f1-number-big {
+    font-size: 75px;
+  }
+
+  .f1-collage {
+    min-height: 700px;
+  }
+
+  .leclerc-card {
+    width: 165px;
+  }
+
+  .car-photo {
+    width: 185px;
+
+    top: 170px;
+  }
+
+  .race-note {
+    width: 230px;
+
+    padding: 22px;
+
+    bottom: 0;
+  }
+
+  .race-note p {
+    font-size: 12px;
+  }
+
+
+  /* Final */
+
+  .final-gallery {
+    gap: 9px;
+  }
+
+  .final-photo {
+    padding: 4px;
+  }
+
+
+  /* Navigation */
+
+  .navigation {
+    bottom: 15px;
+  }
+
+}
+
